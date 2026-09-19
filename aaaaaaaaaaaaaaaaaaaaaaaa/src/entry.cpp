@@ -31,12 +31,17 @@ void mem( )
 	
 	HANDLE hProcess = OpenProcess( PROCESS_VM_READ , FALSE , pid );
 
-	uintptr_t address = 0x611CBD160; // health addy for 1.21.11 
+	uintptr_t address = 0x71209A95C; // health mem addy
 	float v = 0;
 
-	ReadProcessMemory( hProcess , (void*)address , &v , sizeof( v ) , nullptr );	
+	while ( true )
+	{
 
-	std::cout << "f -> " << v << "\n" << std::endl;
+		ReadProcessMemory(hProcess, (void*)address, &v, sizeof(v), nullptr);
+
+		std::cout << "f -> " << v << "\n" << std::flush;
+
+	}
 
 	CloseHandle(hProcess);
 }
